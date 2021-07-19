@@ -39,15 +39,15 @@ public class DosenPage {
 	}
 	
 	@GetMapping("/dosen/update/{id}")
-	public String viewUpdateDosen(@PathVariable long id, Model model) {
-		Dosen dosen = dosenRepo.findByIdDosen(id);
+	public String viewUpdateDosen(@PathVariable String id, Model model) {
+		Dosen dosen = dosenRepo.findByIdDosen(Long.parseLong(id));
 		model.addAttribute("dosen", dosen);
 		return "add_dosen";
 	}
 	
 	@GetMapping("/dosen/delete/{id}")
-	public String deleteDosen(@PathVariable long id, Model model) {
-		this.dosenRepo.deleteById(id);
+	public String deleteDosen(@PathVariable String id, Model model) {
+		this.dosenRepo.deleteById(Long.parseLong(id));
 		model.addAttribute("listDosen", dosenRepo.findAll());
 		return "redirect:/dosen/view";
 	}

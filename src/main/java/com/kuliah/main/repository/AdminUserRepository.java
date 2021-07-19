@@ -6,6 +6,6 @@ import com.kuliah.main.entity.AdminUser;
 
 public interface AdminUserRepository extends CrudRepository<AdminUser, Long> {
 	AdminUser findByUsername(String username);
-	AdminUser findByIdAdmin(long id);
+	AdminUser findByIdAdmin(Long id);
 
 }

@@ -49,9 +49,9 @@ public class MataKuliahPage {
 	
 	
 	@GetMapping("/matakuliah/update/{id}")
-	public String viewUpdateMataKuliah(@PathVariable long id, Model model) {
+	public String viewUpdateMataKuliah(@PathVariable String id, Model model) {
 		
-		MataKuliah MataKuliah = mataKuliahRepository.findByIdMataKuliah(id);
+		MataKuliah MataKuliah = mataKuliahRepository.findByIdMataKuliah(Long.parseLong(id));
 		// buat penampung data MataKuliah di halaman htmlnya
 		model.addAttribute("matakuliah",MataKuliah);
 		
@@ -59,9 +59,9 @@ public class MataKuliahPage {
 	}
 	
 	@GetMapping("/matakuliah/delete/{id}")
-	public String deleteMataKuliah(@PathVariable long id, Model model) {
+	public String deleteMataKuliah(@PathVariable String id, Model model) {
 		
-		this.mataKuliahRepository.deleteById(id);
+		this.mataKuliahRepository.deleteById(Long.parseLong(id));
 		model.addAttribute("listMataKuliah",mataKuliahRepository.findAll());
 		
 		

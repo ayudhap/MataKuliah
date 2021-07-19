@@ -45,15 +45,15 @@ public class MahasiswaPage {
 	}
 	
 	@GetMapping("/mahasiswa/update/{id}")
-	public String viewUpdateMahasiswa(@PathVariable long id, Model model) {
-		Mahasiswa mahasiswa = mahasiswaRepo.findByIdMahasiswa(id);
+	public String viewUpdateMahasiswa(@PathVariable String id, Model model) {
+		Mahasiswa mahasiswa = mahasiswaRepo.findByIdMahasiswa(Long.parseLong(id));
 		model.addAttribute("mahasiswa", mahasiswa);
 		return "add_mahasiswa";
 	}
 	
 	@GetMapping("/mahasiswa/delete/{id}")
-	public String deleteMahasiswa(@PathVariable long id, Model model) {
-		this.mahasiswaRepo.deleteById(id);
+	public String deleteMahasiswa(@PathVariable String id, Model model) {
+		this.mahasiswaRepo.deleteById(Long.parseLong(id));
 		model.addAttribute("listMahasiswa", mahasiswaRepo.findAll());
 		return "redirect:/mahasiswa/view";
 	}

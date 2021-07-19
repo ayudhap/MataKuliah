@@ -26,7 +26,7 @@ public class PertanyaanPage {
 
 	@GetMapping("/pertanyaan/view")
 	public String viewPertanyaan(Model model) {
-		model.addAttribute("listPertanyaan", pertanyaanRepo.findAll());
+		model.addAttribute("listpertanyaan", pertanyaanRepo.findAll());
 		model.addAttribute("active", 4);
 		return "view_pertanyaan";
 	}
@@ -41,7 +41,7 @@ public class PertanyaanPage {
 	public String addPertanyaan(@ModelAttribute Pertanyaan pertanyaan, @RequestParam("file") MultipartFile file,
 			Model model) {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-		String uploadDir = "./user-photos";
+		String uploadDir = "/user-photos";
 		try {
 			FileUtility.saveFile(uploadDir, fileName, file);
 		} catch (Exception e) {
@@ -49,21 +49,21 @@ public class PertanyaanPage {
 		}
 		pertanyaan.setStatusGambar(uploadDir + "/" + fileName);
 		this.pertanyaanRepo.save(pertanyaan);
-		model.addAttribute("listPertanyaan", pertanyaanRepo.findAll());
+		model.addAttribute("listpertanyaan", pertanyaanRepo.findAll());
 		return "redirect:/pertanyaan/view";
 	}
 
 	@GetMapping("/pertanyaan/update/{id}")
-	public String viewUpdatePertanyaan(@PathVariable long id, Model model) {
-		Optional<Pertanyaan> pertanyaan = pertanyaanRepo.findById(id);
+	public String viewUpdatePertanyaan(@PathVariable String id, Model model) {
+		Optional<Pertanyaan> pertanyaan = pertanyaanRepo.findById(Long.parseLong(id));
 		model.addAttribute("pertanyaan", pertanyaan);
 		return "add_pertanyaan";
 	}
 
 	@GetMapping("/pertanyaan/delete/{id}")
-	public String deletePertanyaan(@PathVariable long id, Model model) {
-		this.pertanyaanRepo.deleteById(id);
-		model.addAttribute("listPertanyaan", pertanyaanRepo.findAll());
+	public String deletePertanyaan(@PathVariable String id, Model model) {
+		this.pertanyaanRepo.deleteById(Long.parseLong(id));
+		model.addAttribute("listpertanyaan", pertanyaanRepo.findAll());
 		return "redirect:/pertanyaan/view";
 	}
 

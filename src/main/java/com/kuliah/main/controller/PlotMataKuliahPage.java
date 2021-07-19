@@ -58,8 +58,8 @@ public class PlotMataKuliahPage {
 	}
 	
 	@GetMapping("/plotmatakuliah/update/{id}")
-	public String viewUpdatePlotMataKuliah(@PathVariable Long id, Model model) {
-		PlotMataKuliah plotMataKuliah = plotMataKuliahRepo.findByIdPlotMataKuliah(id);
+	public String viewUpdatePlotMataKuliah(@PathVariable String id, Model model) {
+		PlotMataKuliah plotMataKuliah = plotMataKuliahRepo.findByIdPlotMataKuliah(Long.parseLong(id));
 		model.addAttribute("plotmatakuliah", plotMataKuliah);
 		model.addAttribute("listDosen", dosenRepo.findAll());
 		model.addAttribute("listMahasiswa", mahasiswaRepo.findAll());
@@ -69,15 +69,15 @@ public class PlotMataKuliahPage {
 	}
 	
 	@GetMapping("/plotmatakuliah/delete/{id}")
-	public String deletePlotMataKuliah(@PathVariable Long id, Model model) {
-		this.plotMataKuliahRepo.deleteById(id);
+	public String deletePlotMataKuliah(@PathVariable String id, Model model) {
+		this.plotMataKuliahRepo.deleteById(Long.parseLong(id));
 		model.addAttribute("listPlotMataKuliah", plotMataKuliahRepo.findAll());
 		return "redirect:/plotmatakuliah/view";
 	}
 	
 	@GetMapping("/plotmatakuliah/ujian/{id}")
-	public String viewUjianPlotMataKuliah(@PathVariable Long id, Model model) {
-		model.addAttribute("ujian", soalRepo.findById(id));
+	public String viewUjianPlotMataKuliah(@PathVariable String id, Model model) {
+		model.addAttribute("ujian", soalRepo.findById(Long.parseLong(id)));
 		return "view_ujian";
 	}
 	

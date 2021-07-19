@@ -55,9 +55,9 @@ public class AdminUserPage {
 	
 	
 	@GetMapping("/adminuser/update/{id}")
-	public String viewUpdateAdminUser(@PathVariable long id, Model model) {
+	public String viewUpdateAdminUser(@PathVariable String id, Model model) {
 		
-		AdminUser adminuser = adminUserRepository.findByIdAdmin(id);
+		AdminUser adminuser = adminUserRepository.findByIdAdmin(Long.parseLong(id));
 		// buat penampung data adminuser di halaman htmlnya
 		model.addAttribute("adminuser",adminuser);
 		
@@ -65,9 +65,9 @@ public class AdminUserPage {
 	}
 	
 	@GetMapping("/adminuser/delete/{id}")
-	public String deleteAdminUser(@PathVariable long id, Model model) {
+	public String deleteAdminUser(@PathVariable String id, Model model) {
 		
-		this.adminUserRepository.deleteById(id);
+		this.adminUserRepository.deleteById(Long.parseLong(id));
 		model.addAttribute("listAdminUser",adminUserRepository.findAll());
 		
 		

@@ -46,16 +46,16 @@ public class SoalPage {
 	}
 	
 	@GetMapping("/soal/update/{id}")
-	public String viewUpdateSoal(@PathVariable long id, Model model) {
-		Optional<Soal> soal = soalRepo.findById(id);
+	public String viewUpdateSoal(@PathVariable String id, Model model) {
+		Optional<Soal> soal = soalRepo.findById(Long.parseLong(id));
 		model.addAttribute("soal", soal);
 		model.addAttribute("listPertanyaan", pertanyaanRepo.findAll());
 		return "add_soal";
 	}
 	
 	@GetMapping("/soal/delete/{id}")
-	public String deleteSoal(@PathVariable long id, Model model) {
-		this.soalRepo.deleteById(id);
+	public String deleteSoal(@PathVariable String id, Model model) {
+		this.soalRepo.deleteById(Long.parseLong(id));
 		model.addAttribute("listSoal", soalRepo.findAll());
 		return "redirect:/soal/view";
 	}
